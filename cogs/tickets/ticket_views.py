@@ -77,6 +77,15 @@ class TicketSelectView(discord.ui.View):
                         f"❌ Ya tienes un ticket abierto de esta categoría: <#{existing_ticket}>", 
                         ephemeral=True
                     )
+                    
+                    select.placeholder = "Elige una categoría para el ticket"
+                    for option in select.options:
+                        option.default = False
+                    
+                    try:
+                        await interaction.edit_original_response(view=self)
+                    except:
+                        pass
                     return
                 else:
                     print(f"Canal {existing_ticket} no existe, marcando ticket como eliminado")
@@ -103,6 +112,15 @@ class TicketSelectView(discord.ui.View):
             for option in select.options:
                 option.default = False
             
+            try:
+                await interaction.edit_original_response(view=self)
+            except:
+                try:
+                    message = await interaction.original_response()
+                    await message.edit(view=self)
+                except:
+                    pass
+            
         except Exception as e:
             print(f"Error en category_select: {e}")
             try:
@@ -110,6 +128,15 @@ class TicketSelectView(discord.ui.View):
                     await interaction.response.send_message("❌ Error al procesar la selección. Inténtalo de nuevo.", ephemeral=True)
                 else:
                     await interaction.followup.send("❌ Error al procesar la selección. Inténtalo de nuevo.", ephemeral=True)
+                
+                select.placeholder = "Elige una categoría para el ticket"
+                for option in select.options:
+                    option.default = False
+                
+                try:
+                    await interaction.edit_original_response(view=self)
+                except:
+                    pass
             except:
                 pass
 

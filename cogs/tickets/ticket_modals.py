@@ -224,7 +224,7 @@ class ComprasModal(BaseTicketModal):
             max_length=100
         )
         self.id_transferencia = discord.ui.TextInput(
-            label="ID de transferencia (la que te llega al correo)",
+            label="ID de transferencia (la que llega al correo)",
             placeholder="Introduce el ID de tu transferencia...",
             required=True,
             max_length=100
